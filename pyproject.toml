@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "embedding-inspector"
+version = "0.1.0"
+description = "Explore and debug embedding spaces from the CLI"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Cognition Commons", email = "tools@cognitioncommons.org" }
+]
+keywords = ["embeddings", "vectors", "rag", "similarity-search", "ai", "machine-learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+all = [
+    "scikit-learn>=1.0.0",  # For clustering, PCA
+    "umap-learn>=0.5.0",     # For UMAP visualization
+    "faiss-cpu>=1.7.0",      # For FAISS index support
+    "matplotlib>=3.5.0",     # For plotting
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+embedding-inspector = "embedding_inspector.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/cognitioncommons/embedding-inspector"
+Documentation = "https://github.com/cognitioncommons/embedding-inspector#readme"
+Repository = "https://github.com/cognitioncommons/embedding-inspector.git"
+Issues = "https://github.com/cognitioncommons/embedding-inspector/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/embedding_inspector"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
